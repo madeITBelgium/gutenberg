@@ -120,6 +120,7 @@ class EditorProvider extends Component {
 				'__experimentalEnableFullSiteEditingDemo',
 				'__experimentalGlobalStylesUserEntityId',
 				'__experimentalGlobalStylesBase',
+				'__experimentalBlockPatterns',
 				'gradients',
 			] ),
 			mediaUpload: hasUploadPermissions ? mediaUpload : undefined,
