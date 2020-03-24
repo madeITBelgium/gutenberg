@@ -1,16 +1,10 @@
 /**
- * External dependencies
- */
-import { get } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import { useSelect } from '@wordpress/data';
 import { Button } from '@wordpress/components';
 import { Path, SVG } from '@wordpress/primitives';
 import { __ } from '@wordpress/i18n';
-import { addQueryArgs } from '@wordpress/url';
 
 const wordPressLogo = (
 	<SVG width="28" height="28" viewBox="0 0 128 128" version="1.1">
@@ -39,10 +33,10 @@ function FullscreenModeClose() {
 			className="edit-post-fullscreen-mode-close"
 			icon={ wordPressLogo }
 			iconSize={ 36 }
-			href={ addQueryArgs( 'edit.php', {
-				post_type: postType.slug,
-			} ) }
-			label={ get( postType, [ 'labels', 'view_items' ], __( 'Back' ) ) }
+			onClick={ function() {
+				document.body.classList.toggle( 'is-showing-admin-menu' );
+			} }
+			label={ __( 'Show sidebar menu' ) }
 		/>
 	);
 }
