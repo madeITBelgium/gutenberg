@@ -52,7 +52,8 @@ class BlockListBlock extends Component {
 	}
 
 	getBlockForType() {
-		const { parentWidth } = this.props;
+		const { customBlockProps } = this.props;
+		const { parentWidth } = customBlockProps || {};
 
 		return (
 			<BlockEdit
@@ -94,7 +95,6 @@ class BlockListBlock extends Component {
 			parentId,
 			isDimmed,
 			isTouchable,
-			customOnDelete,
 			horizontalDirection,
 			hasParent,
 			isParentSelected,
@@ -103,6 +103,7 @@ class BlockListBlock extends Component {
 			getStylesFromColorScheme,
 			marginVertical,
 			marginHorizontal,
+			customBlockProps,
 		} = this.props;
 
 		const accessibilityLabel = getAccessibleBlockLabel(
@@ -110,6 +111,8 @@ class BlockListBlock extends Component {
 			attributes,
 			order + 1
 		);
+
+		const { customOnDelete } = customBlockProps || {};
 
 		return (
 			<TouchableWithoutFeedback

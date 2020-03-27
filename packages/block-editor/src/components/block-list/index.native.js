@@ -89,11 +89,9 @@ export class BlockList extends Component {
 	}
 
 	shouldShowInnerBlockAppender() {
-		const {
-			blockClientIds,
-			renderAppender,
-			shouldRenderFooterAppender = false,
-		} = this.props;
+		const { blockClientIds, renderAppender, customBlockProps } = this.props;
+		const { shouldRenderFooterAppender = false } = customBlockProps || {};
+
 		if ( ! shouldRenderFooterAppender ) {
 			return renderAppender && blockClientIds.length > 0;
 		}
@@ -149,6 +147,7 @@ export class BlockList extends Component {
 					keyboardShouldPersistTaps="always"
 					scrollViewStyle={ {
 						flex: isRootList ? 1 : 0,
+						overflow: isRootList ? 'hidden' : 'visible',
 					} }
 					data={ blockClientIds }
 					keyExtractor={ identity }
@@ -193,11 +192,10 @@ export class BlockList extends Component {
 			isReadOnly,
 			shouldShowInsertionPointBefore,
 			shouldShowInsertionPointAfter,
-			customOnDelete,
-			customOnAdd,
 			__experimentalMoverDirection,
 			marginVertical = styles.defaultBlock.marginTop,
 			marginHorizontal = styles.defaultBlock.marginLeft,
+			customBlockProps,
 		} = this.props;
 
 		const horizontalDirection =
@@ -219,10 +217,8 @@ export class BlockList extends Component {
 						onCaretVerticalPositionChange={
 							this.onCaretVerticalPositionChange
 						}
-						parentWidth={ this.props.parentWidth }
-						customOnDelete={ customOnDelete }
 						horizontalDirection={ horizontalDirection }
-						customOnAdd={ customOnAdd }
+						customBlockProps={ customBlockProps }
 					/>
 					{ ! this.shouldShowInnerBlockAppender() &&
 						shouldShowInsertionPointAfter( clientId ) && (
@@ -239,8 +235,9 @@ export class BlockList extends Component {
 			isReadOnly,
 			withFooter = true,
 			renderAppender,
-			shouldRenderFooterAppender,
+			customBlockProps,
 		} = this.props;
+		const { shouldRenderFooterAppender } = customBlockProps || {};
 
 		if ( ! isReadOnly && withFooter ) {
 			return (
